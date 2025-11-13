@@ -8,8 +8,6 @@
 </head>
 <body>
 
-
-
   <!-- Caixa principal -->
   <div class="login-container">
     <div class="login-box">
@@ -17,16 +15,16 @@
 
       <h2>Login</h2>
 
-      <form onsubmit="event.preventDefault(); handleLogin();">
+      <form id="loginForm">
         <div class="input-group">
           <label for="email">E-mail</label>
-          <input id="email" type="email" placeholder="Digite seu e-mail">
+          <input id="email" type="email" placeholder="Digite seu e-mail" required>
         </div>
 
         <div class="input-group">
           <label for="senha">Senha</label>
           <div class="senha-wrapper">
-            <input id="senha" type="password" placeholder="Digite sua senha">
+            <input id="senha" type="password" placeholder="Digite sua senha" required>
             <img id="toggleSenha" class="icone-olho" src="../assets/img/olhoFechado.png" alt="Mostrar senha">
           </div>
         </div>
@@ -35,11 +33,11 @@
           <a href="#" id="esqueciSenhaLink">Esqueci minha senha</a>
         </p>
 
-        <button type="submit">Entrar</button>
+        <button id="entrar" type="submit">Entrar</button>
 
         <hr class="divider">
 
-        <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro.html'">
+        <button id="cadastro" type="button" class="btn-cadastrar">
           Cadastrar
         </button>
       </form>
@@ -53,32 +51,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-
-  <!-- Script -->
   <script type="module" src="../js/login.js"></script>
-
-  <!-- mascote piscando -->
-  <script>
-  const passwordInput = document.getElementById('password');
-  const togglePassword = document.getElementById('togglePassword');
-  const mascote = document.getElementById('mascote');
-
-  togglePassword.addEventListener('click', () => {
-    const isPassword = passwordInput.type === 'password';
-    passwordInput.type = isPassword ? 'text' : 'password';
-
-    // Alterna o ícone do olho
-    togglePassword.src = isPassword 
-      ? '../assets/img/olhoAberto.png' 
-      : '../assets/img/olhoFechado.png';
-
-    // Alterna o estado do mascote
-    mascote.src = isPassword 
-      ? '../assets/img/mascote.png'        // olhos abertos
-      : '../assets/img/mascoteBlind.png'; // olhos fechados
-  });
-</script>
 
 </body>
 </html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - SustentArte</title>
+  <link rel="stylesheet" href="../css/login.css" />
+</head>
+<body>
+
+
+
+  <!-- Caixa principal -->
+  <div class="login-container">
+    <div class="login-box">
+      <img id="mascote" class="mascote" src="../assets/img/mascoteBlind.png" alt="Mascote SustentArte">
+
+      <h2>Login</h2>
+
+      <form onsubmit="event.preventDefault(); handleLogin();">
+        <div class="input-group">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="Digite seu e-mail">
+        </div>
+
+        <div class="input-group">
+          <label for="senha">Senha</label>
+          <div class="senha-wrapper">
+            <input id="senha" type="password" placeholder="Digite sua senha">
+            <img id="toggleSenha" class="icone-olho" src="../assets/img/olhoFechado.png" alt="Mostrar senha">
+          </div>
+        </div>
+
+        <p class="esqueci-senha">
+          <a href="#" id="esqueciSenhaLink">Esqueci minha senha</a>
+        </p>
+
+        <button type="submit">Entrar</button>
+
+        <hr class="divider">
+
+        <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro.html'">
+          Cadastrar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer>
+    <img src="../assets/img/logo-crescimento.png" alt="Logo Crescimento">
+    <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+
+  <!-- Script -->
+  <script type="module" src="../js/login.js"></script>
+
+  <!-- mascote piscando -->
+  <script>
+  const passwordInput = document.getElementById('password');
+  const togglePassword = document.getElementById('togglePassword');
+  const mascote = document.getElementById('mascote');
+
+  togglePassword.addEventListener('click', () => {
+    const isPassword = passwordInput.type === 'password';
+    passwordInput.type = isPassword ? 'text' : 'password';
+
+    // Alterna o ícone do olho
+    togglePassword.src = isPassword 
+      ? '../assets/img/olhoAberto.png' 
+      : '../assets/img/olhoFechado.png';
+
+    // Alterna o estado do mascote
+    mascote.src = isPassword 
+      ? '../assets/img/mascote.png'        // olhos abertos
+      : '../assets/img/mascoteBlind.png'; // olhos fechados
+  });
+</script>
+
+</body>
+</html>

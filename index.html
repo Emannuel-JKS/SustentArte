@@ -24,12 +24,11 @@
   </footer>
 
   <script>
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const hash = window.location.hash;
 
-  // Se chegou via link de recuperação do Supabase
   if (hash.includes("type=recovery")) {
-    window.location.href = "./reset-password.html";
+    window.location.href = "../pages/reset-password.html";
   }
 });
 </script>

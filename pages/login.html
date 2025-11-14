@@ -90,5 +90,18 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="module" src="../js/login.js"></script>
 
+  <script>
+  // Verifica os parâmetros da URL
+  const params = new URLSearchParams(window.location.hash.slice(1));
+  const type = params.get('type');
+
+  // Se o Supabase enviou um "recovery", manda para reset-password.html
+  if (type === "recovery") {
+    console.log("Recovery detectado! Redirecionando para reset-password.html...");
+    window.location.href = "reset-password.html";
+  }
+</script>
+
+
 </body>
 </html>

@@ -1,8 +1,8 @@
 // === SUPABASE ===
 const SUPABASE_URL = "https://afobiejrsjolurxeqnuz.supabase.co";
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
+const SUPABASE_ANON_KEY = "SEU KEY AQUI";
 
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // === ELEMENTOS ===
 const novaSenha = document.getElementById("novaSenha");
@@ -31,14 +31,12 @@ function toggleCampo(campo, olhoIcon) {
 // Eventos
 toggleNova.addEventListener("click", () => {
   toggleCampo(novaSenha, toggleNova);
-  // Sincronizar
   confirmarSenha.type = novaSenha.type;
   toggleConfirmar.src = toggleNova.src;
 });
 
 toggleConfirmar.addEventListener("click", () => {
   toggleCampo(confirmarSenha, toggleConfirmar);
-  // Sincronizar
   novaSenha.type = confirmarSenha.type;
   toggleNova.src = toggleConfirmar.src;
 });
@@ -58,9 +56,12 @@ btnSalvar.addEventListener("click", async () => {
     return;
   }
 
-  const { data, error } = await supabase.auth.updateUser({ password: senha1 });
+  const { data, error } = await client.auth.updateUser({
+    password: senha1
+  });
 
   if (error) {
+    console.log(error);
     alert("Erro ao atualizar senha: " + error.message);
     return;
   }

@@ -1,50 +1,69 @@
-body {
-  margin: 0;
+/* Reset e configurações básicas */
+* {
+  margin: 5;
   padding: 0;
-  background: #0d1f0d; /* fundo igual ao login */
-  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../assets/img/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
 }
 
 .reset-box {
-  width: 350px;
-  background: #1a2e1a; /* verde musgo igual ao login */
-  border: 3px solid #0b160b; /* verde escuro */
-  border-radius: 15px;
-  padding: 25px;
+  background-color: #b8e6b7; /* verde musgo suave */
+  border: 2px solid #2e4b23; /* verde escuro */
+  padding: 30px 40px;
+  border-radius: 20px;
   text-align: center;
-  position: relative;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  color: #161515; /* deixa o texto legível sobre o fundo escuro */
 }
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
 .mascote {
-  width: 130px;
-  display: block;
-  margin: 0 auto 10px auto;
+  width: 120px;
+  height: auto;
+  margin-bottom: 15 px;
+  transition: all 0.3s ease;
 }
 
 .input-group {
-  position: relative;
+  margin-bottom: 15px;
   text-align: left;
-  margin-bottom: 20px;
+  position: relative;
 }
 
+
 label {
-  color: #f2fff2;
-  font-size: 14px;
+  display: block;
+  margin-bottom: 5px;
+  color: #2e7d32;
+  font-weight: 600;
 }
 
 input {
   width: 100%;
   padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-top: 5px;
-  font-size: 15px;
-  background: #e9ffe9;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1rem;
 }
 
 .toggle-eye {
@@ -68,3 +87,34 @@ button {
 button:hover {
   background: #0a260a;
 }
+
+/* Rodapé */
+footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+  background: rgba(255, 255, 255, 0.6);
+  border-top: 2px solid #4caf50;
+  font-size: 0.9rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #2e7d32;
+}
+
+footer img {
+  height: 36px;
+  width: auto;
+}
+
+.reset-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+

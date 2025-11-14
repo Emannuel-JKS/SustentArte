@@ -22,6 +22,18 @@
     <img src="../assets/img/logo-crescimento.png" alt="Logo Crescimento">
     <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
   </footer>
+
+  <script>
+document.addEventListener("DOMContentLoaded", async () => {
+  const hash = window.location.hash;
+
+  // Se chegou via link de recuperação do Supabase
+  if (hash.includes("type=recovery")) {
+    window.location.href = "./reset-password.html";
+  }
+});
+</script>
+
   
 </body>
 </html>

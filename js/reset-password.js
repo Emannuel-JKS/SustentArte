@@ -1,8 +1,31 @@
 // === SUPABASE ===
-const SUPABASE_URL = "https://afobiejrsjolurxeqnuz.supabase.co";
-const SUPABASE_ANON_KEY = "SEU KEY AQUI";
+import { createClient } from "https://esm.sh/@supabase/supabase-js";
 
-const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const SUPABASE_URL = "https://afobiejrsjolurxeqnuz.supabase.co";
+const SUPABASE_ANON_KEY =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// === Capturar token da URL ===
+const params = new URLSearchParams(window.location.search);
+const token = params.get("token");
+const type = params.get("type");
+
+console.log("Token recebido:", token);
+console.log("Tipo:", type);
+
+// === Criar sessão TEMPORÁRIA para permitir trocar a senha ===
+if (token && type === "recovery") {
+  supabase.auth.exchangeCodeForSession(token).then(({ data, error }) => {
+    if (error) {
+      console.error("Erro ao criar sessão:", error.message);
+      alert("Erro ao validar o link de recuperação.");
+    }
+  });
+} else {
+  alert("Link inválido ou expirado!");
+}
 
 // === ELEMENTOS ===
 const novaSenha = document.getElementById("novaSenha");
@@ -28,7 +51,7 @@ function toggleCampo(campo, olhoIcon) {
     : "../assets/img/mascoteBlind.png";
 }
 
-// Eventos
+// === Eventos de clique dos olhos ===
 toggleNova.addEventListener("click", () => {
   toggleCampo(novaSenha, toggleNova);
   confirmarSenha.type = novaSenha.type;
@@ -41,7 +64,7 @@ toggleConfirmar.addEventListener("click", () => {
   toggleNova.src = toggleConfirmar.src;
 });
 
-// === Salvar nova senha ===
+// === Atualizar senha ===
 btnSalvar.addEventListener("click", async () => {
   const senha1 = novaSenha.value.trim();
   const senha2 = confirmarSenha.value.trim();
@@ -56,12 +79,11 @@ btnSalvar.addEventListener("click", async () => {
     return;
   }
 
-  const { data, error } = await client.auth.updateUser({
-    password: senha1
+  const { error } = await supabase.auth.updateUser({
+    password: senha1,
   });
 
   if (error) {
-    console.log(error);
     alert("Erro ao atualizar senha: " + error.message);
     return;
   }

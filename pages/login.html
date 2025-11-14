@@ -8,14 +8,16 @@
 </head>
 <body>
 
-  <!-- Caixa principal -->
+  <!-- Container principal -->
   <div class="login-container">
     <div class="login-box">
+
       <img id="mascote" class="mascote" src="../assets/img/mascoteBlind.png" alt="Mascote SustentArte">
 
       <h2>Login</h2>
 
       <form id="loginForm">
+
         <div class="input-group">
           <label for="email">E-mail</label>
           <input id="email" type="email" placeholder="Digite seu e-mail" required>
@@ -37,49 +39,35 @@
 
         <hr class="divider">
 
-        <button id="cadastro" type="button" class="btn-cadastrar">
-          Cadastrar
-        </button>
+        <button id="cadastro" type="button" class="btn-cadastrar">Cadastrar</button>
       </form>
     </div>
   </div>
 
-  <!-- POPUP DE RECUPERAÇÃO DE SENHA -->
-<div id="modalRecuperar" class="modal">
-  <div class="modal-content">
-    <h3>Recuperar Senha</h3>
-    <p>Informe o seu e-mail para enviarmos o link de redefinição:</p>
 
-    <input id="recuperarEmail" type="email" placeholder="Digite seu e-mail">
+  <!-- POPUP DE RECUPERAÇÃO DE SENHA (CORRETO) -->
+  <div id="modalRecuperar" class="modal">
+    <div class="modal-content">
 
-    <div class="modal-buttons">
-      <button id="btnEnviarRecuperar">Enviar</button>
-      <button id="btnFecharModal" class="cancel">Cancelar</button>
+      <img id="mascoteModal" src="../assets/img/mascoteBlink.png" class="mascote-popup">
+
+      <h3>Recuperar Senha</h3>
+      <p>Digite seu e-mail para enviarmos o link de redefinição:</p>
+
+      <input id="recuperarEmail" type="email" placeholder="Digite seu e-mail">
+
+      <div class="modal-buttons">
+        <button id="btnEnviarRecuperar">Enviar</button>
+        <button id="btnFecharModal" class="cancel">Cancelar</button>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- POPUP DE RECUPERAÇÃO DE SENHA -->
-<div id="modalRecuperar" class="modal">
-  <div class="modal-content">
 
-    <img id="mascoteModal" src="../assets/img/mascoteBlink.png" class="mascote-popup">
+  <!-- ÁUDIOS -->
+  <audio id="somAbrir" src="../assets/sounds/open.mp3" preload="auto"></audio>
+  <audio id="somFechar" src="../assets/sounds/close.mp3" preload="auto"></audio>
 
-    <h3>Recuperar Senha</h3>
-    <p>Digite seu e-mail para enviarmos o link de redefinição:</p>
-
-    <input id="recuperarEmail" type="email" placeholder="Digite seu e-mail">
-
-    <div class="modal-buttons">
-      <button id="btnEnviarRecuperar">Enviar</button>
-      <button id="btnFecharModal" class="cancel">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-<!-- ÁUDIO -->
-<audio id="somAbrir" src="../assets/sounds/open.mp3" preload="auto"></audio>
-<audio id="somFechar" src="../assets/sounds/close.mp3" preload="auto"></audio>
 
   <!-- Rodapé -->
   <footer>
@@ -87,22 +75,21 @@
     <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
   </footer>
 
+
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script type="module" src="../js/login.js"></script>
 
   <script>
-  // Verifica os parâmetros da URL
-  const params = new URLSearchParams(window.location.hash.slice(1));
-  const type = params.get('type');
+    // Verifica parâmetros do hash da URL enviados pelo Supabase
+    const params = new URLSearchParams(window.location.hash.slice(1));
+    const type = params.get('type');
 
-  // Se o Supabase enviou um "recovery", manda para reset-password.html
-  if (type === "recovery") {
-    console.log("Recovery detectado! Redirecionando para reset-password.html...");
-    window.location.href = "../pages/reset-password.html";
-  }
-</script>
-
-
+    if (type === "recovery") {
+      console.log("Recovery detectado! Redirecionando para reset-password.html...");
+      window.location.href = "../pages/reset-password.html";
+    }
+  </script>
 
 </body>
 </html>

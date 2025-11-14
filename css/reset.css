@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #0d1f0d; /* fundo igual ao login */
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.reset-box {
+  width: 350px;
+  background: #1a2e1a; /* verde musgo igual ao login */
+  border: 3px solid #0b160b; /* verde escuro */
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+.mascote {
+  width: 130px;
+  display: block;
+  margin: 0 auto 10px auto;
+}
+
+.input-group {
+  position: relative;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label {
+  color: #f2fff2;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin-top: 5px;
+  font-size: 15px;
+  background: #e9ffe9;
+}
+
+.toggle-eye {
+  width: 28px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #0b2d0b;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 17px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0a260a;
+}

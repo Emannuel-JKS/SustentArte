@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  background-image: url('../assets/img/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+  padding-top: 140px; /* mesmo tamanho do header */
+}
+
+/* Rodapé fixo */
+footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 0;
+  background: rgba(255, 255, 255, 0.6);
+  border-top: 2px solid #4caf50;
+  font-size: 0.9rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  color: #2e7d32;
+}
+
+footer img {
+  height: 36px;
+  width: auto;
+}
+
+/* ===== CABEÇALHO EM 3 FAIXAS FIXO ===== */
+.top-header {
+  width: 100%;
+  height: 75px; /* altura total */
+  background: linear-gradient(
+    to bottom,
+    #2d8427 0%,      /* faixa 1 */
+    #2d8427 50%,
+
+    #2ecc38 50%,     /* faixa 2 */
+    #2ecc38 80%,
+
+    #a2ff70 80%,     /* faixa 3 */
+    #a2ff70 100%
+  );
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;     /* <-- Fica grudado no topo */
+  top: 0;              /* <-- Gruda no topo */
+  left: 0;
+  z-index: 2000;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+.top-header img {
+  height: 85px;
+  width: auto;
+}
+
+

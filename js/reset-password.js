@@ -24,7 +24,7 @@ if (token && type === "recovery") {
     }
   });
 } else {
-  alert("Link inválido ou expirado!");
+  alert(""); // corrigir mais tarde
 }
 
 // === ELEMENTOS ===

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tutoriais - SustentArte</title>
+    <link rel="stylesheet" href="../css/tutoriais.css" />
+</head>
+
+<body>
+
+    <!-- Cabeçalho -->
+    <header class="top-header">
+        <img src="../assets/img/tutoriais.png.png" alt="Sustentarte Logo">
+
+        <div class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </div>
+
+        <!-- Menu Suspenso -->
+        <nav id="menu" class="menu-hidden">
+            <ul>
+                <li><a href="mapa.html">Mapa de Reciclagem</a></li>
+                <li><a href="tutoriais.html">Tutoriais</a></li>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="../index.html">Sair</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ===== BARRA SUPERIOR ===== -->
+    <div class="home-container"></div>
+
+
+    <!-- ===================================== -->
+    <!-- 🟩 ÁREA CENTRAL DE TUTORIAIS (NOVO)   -->
+    <!-- ===================================== -->
+    <section class="tutorials-container">
+
+        <!-- === VIDEO 1 === -->
+        <div class="tutorial-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/0bjpFeRew8s" allowfullscreen title="Vídeo Tutorial 1">
+                </iframe>
+            </div>
+
+            <h3 class="tutorial-title">Como Reciclar Corretamente</h3>
+
+            <div class="tutorial-actions">
+                <button class="like-btn" onclick="toggleLike(this)">
+                    <span class="heart">&#9825;</span> <!-- coração vazio -->
+                </button>
+
+                <button class="comment-btn" onclick="toggleCommentBox(this)">
+                    💬 Comentários
+                </button>
+            </div>
+
+            <div class="comment-box hidden">
+                <textarea placeholder="Escreva um comentário..."></textarea>
+                <button class="send-comment">Enviar</button>
+            </div>
+
+        </div>
+
+                <!-- === VIDEO 2 === -->
+        <div class="tutorial-card">
+            <div class="video-wrapper">
+                <iframe src="https://www.youtube.com/embed/LV2u4or_eeY" allowfullscreen title="Vídeo Tutorial 1">
+                </iframe>
+            </div>
+
+            <h3 class="tutorial-title">Como Reciclar Corretamente 2</h3>
+
+            <div class="tutorial-actions">
+                <button class="like-btn" onclick="toggleLike(this)">
+                    <span class="heart">&#9825;</span> <!-- coração vazio -->
+                </button>
+
+                <button class="comment-btn" onclick="toggleCommentBox(this)">
+                    💬 Comentários
+                </button>
+            </div>
+
+            <div class="comment-box hidden">
+                <textarea placeholder="Escreva um comentário..."></textarea>
+                <button class="send-comment">Enviar</button>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <!-- Rodapé -->
+    <footer>
+        <img src="../assets/img/logo-crescimento.png" alt="Logo Crescimento">
+        <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            menu.classList.toggle("menu-hidden");
+        }
+
+        function toggleCommentBox(btn) {
+            const box = btn.parentElement.nextElementSibling;
+            box.classList.toggle("hidden");
+        }
+    </script>
+    <script defer src="../js/tutoriais.js"></script>
+</body>
+
+</html>

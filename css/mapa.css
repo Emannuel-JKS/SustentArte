@@ -200,11 +200,10 @@ footer img {
 /* --- MAPA FIXO NO TOPO --- */
 #map {
   width: 100%;
-  height: 600px;
-  margin-top: 75px; /* Altura do cabeçalho */
-  border-radius: 15px;
-  overflow: hidden;
+  height: calc(100vh - 75px); /* tela inteira - cabeçalho */
+  margin-top: 75px;           /* empurra para ficar abaixo do header */
 }
+
 
 
 /* --- ÁREA DO CONTEÚDO QUE DESCE --- */

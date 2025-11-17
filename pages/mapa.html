@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mapa - SustentArte</title>
   <link rel="stylesheet" href="../css/mapa.css" />
-
 </head>
+
 <body>
-  
+
   <!-- Cabeçalho -->
   <header class="top-header">
     <img src="../assets/img/mapa-logo.png.png" alt="Sustentarte Logo">
@@ -26,12 +27,8 @@
     </nav>
   </header>
 
-  <!-- ===== CONTAINER CENTRAL DO MAPA ===== -->
-  <div class="mapa-wrapper">
-    <div class="mapa-container">
-      <div id="map"></div>
-    </div>
-  </div>
+  <!-- MAPA EM TELA CHEIA -->
+  <div id="map"></div>
 
   <!-- Rodapé -->
   <footer>
@@ -39,7 +36,6 @@
     <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
   </footer>
 
-  <!-- Scripts -->
   <script>
     function toggleMenu() {
       const menu = document.getElementById("menu");
@@ -47,60 +43,12 @@
     }
   </script>
 
+  <!-- JS PRINCIPAL DO MAPA -->
+  <script src="../js/mapa.js"></script>
 
-  <!-- GOOGLE MAPS API + SEU SCRIPT -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCAqJ_ucX_eXXS4D7Ch4fKdMi1nDzgxG0&callback=initMap" async defer></script>
-
-  <script>
-  function initMap() {
-  const mapa = new google.maps.Map(document.getElementById("map"), {
-    zoom: 11,
-    center: { lat: -2.53, lng: -44.30 },
-  });
-
-  if (!navigator.geolocation) {
-    alert("Seu navegador não suporta geolocalização.");
-    return;
-  }
-
-  navigator.geolocation.getCurrentPosition(
-    (pos) => {
-      const userLocation = {
-        lat: pos.coords.latitude,
-        lng: pos.coords.longitude,
-      };
-
-      mapa.setCenter(userLocation);
-
-      new google.maps.Marker({
-        position: userLocation,
-        map: mapa,
-        title: "Você está aqui!"
-      });
-    },
-
-    (erro) => {
-      console.error("Erro geolocalização:", erro);
-
-      if (erro.code === 1) alert("⚠ Permissão negada. Vá nas configurações e permita a localização.");
-      if (erro.code === 2) alert("❌ Localização indisponível.");
-      if (erro.code === 3) alert("⏳ Tempo de busca excedido.");
-
-      alert("Erro ao tentar obter localização: " + erro.message);
-    },
-
-    {
-      enableHighAccuracy: true,
-      timeout: 8000,
-      maximumAge: 0
-    }
-  );
-}
-
-
-
-</script>
-
-
+  <!-- GOOGLE MAPS API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCAqJ_ucX_eXXS4D7Ch4fKdMi1nDzgxG0&callback=initMap"
+    async defer></script>
 </body>
+
 </html>

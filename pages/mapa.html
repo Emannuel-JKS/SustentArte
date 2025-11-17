@@ -52,14 +52,45 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCAqJ_ucX_eXXS4D7Ch4fKdMi1nDzgxG0&callback=initMap" async defer></script>
 
   <script>
-    // ESTE INITMAP ESTÁ PRONTO PARA O SEU JS COMPLETO DO MAPA
-    function initMap() {
-      const mapa = new google.maps.Map(document.getElementById("map"), {
-        zoom: 11,
-        center: { lat: -2.5307, lng: -44.3068 } // São Luís/MA
-      });
+  function initMap() {
+    // Primeiro cria o mapa (ele será reposicionado depois)
+    const mapa = new google.maps.Map(document.getElementById("map"), {
+      zoom: 11,
+      center: { lat: -2.53, lng: -44.30 }, // posição padrão caso o usuário negue acesso
+    });
+
+    // Verifica se o navegador suporta geolocalização
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        // SUCESSO
+        (pos) => {
+          const userLocation = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          };
+
+          // Move o mapa para a localização do usuário
+          mapa.setCenter(userLocation);
+
+          // Cria um marcador no local do usuário
+          new google.maps.Marker({
+            position: userLocation,
+            map: mapa,
+            title: "Você está aqui!"
+          });
+        },
+
+        // ERRO
+        () => {
+          alert("Não foi possível obter sua localização.");
+        }
+      );
+    } else {
+      alert("Seu dispositivo não suporta geolocalização.");
     }
-  </script>
+  }
+</script>
+
 
 </body>
 </html>

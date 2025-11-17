@@ -3,52 +3,63 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login - SustentArte</title>
+  <title>Mapa - SustentArte</title>
   <link rel="stylesheet" href="../css/mapa.css" />
-  
+
 </head>
 <body>
   
   <!-- Cabeçalho -->
   <header class="top-header">
-  <img src="../assets/img/mapa-logo.png.png" alt="Sustentarte Logo">
-  <div class="menu-btn" onclick="toggleMenu()">
-  ☰
-  </div>
+    <img src="../assets/img/mapa-logo.png.png" alt="Sustentarte Logo">
 
-  <!-- Menu Suspenso -->
-  <nav id="menu" class="menu-hidden">
-    <ul>
-      <li><a href="mapa.html">Mapa de Reciclagem</a></li>
-      <li><a href="tutoriais.html">Tutoriais</a></li>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="../index.html">Sair</a></li>
-    </ul>
-  </nav>
-  
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+    <!-- Menu Suspenso -->
+    <nav id="menu" class="menu-hidden">
+      <ul>
+        <li><a href="mapa.html">Mapa de Reciclagem</a></li>
+        <li><a href="tutoriais.html">Tutoriais</a></li>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="../index.html">Sair</a></li>
+      </ul>
+    </nav>
   </header>
-<!-- ===== BARRA SUPERIOR ===== -->
-  <div class="home-container">
+
+  <!-- ===== CONTAINER CENTRAL DO MAPA ===== -->
+  <div class="mapa-wrapper">
+    <div class="mapa-container">
+      <div id="map"></div>
+    </div>
   </div>
 
-
- 
   <!-- Rodapé -->
   <footer>
     <img src="../assets/img/logo-crescimento.png" alt="Logo Crescimento">
     <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
   </footer>
 
-
   <!-- Scripts -->
   <script>
-  function toggleMenu() {
-    const menu = document.getElementById("menu");
-    menu.classList.toggle("menu-hidden");
-  }
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.classList.toggle("menu-hidden");
+    }
   </script>
 
 
+  <!-- GOOGLE MAPS API + SEU SCRIPT -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBCAqJ_ucX_eXXS4D7Ch4fKdMi1nDzgxG0&callback=initMap" async defer></script>
+
+  <script>
+    // ESTE INITMAP ESTÁ PRONTO PARA O SEU JS COMPLETO DO MAPA
+    function initMap() {
+      const mapa = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: { lat: -2.5307, lng: -44.3068 } // São Luís/MA
+      });
+    }
+  </script>
 
 </body>
 </html>

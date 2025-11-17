@@ -17,7 +17,8 @@ body {
   align-items: center;
   font-family: 'Poppins', sans-serif;
   overflow: hidden;
-  padding-top: 140px; /* mesmo tamanho do header */
+  padding-top: 140px;
+  /* mesmo tamanho do header */
 }
 
 /* Rodapé fixo */
@@ -46,30 +47,35 @@ footer img {
 /* ===== CABEÇALHO EM 3 FAIXAS FIXO ===== */
 .top-header {
   width: 100%;
-  height: 75px; /* altura total */
-  background: linear-gradient(
-    to bottom,
-    #2d8427 0%,      /* faixa 1 */
-    #2d8427 50%,
+  height: 75px;
+  /* altura total */
+  background: linear-gradient(to bottom,
+      #2d8427 0%,
+      /* faixa 1 */
+      #2d8427 50%,
 
-    #2ecc38 50%,     /* faixa 2 */
-    #2ecc38 80%,
+      #2ecc38 50%,
+      /* faixa 2 */
+      #2ecc38 80%,
 
-    #a2ff70 80%,     /* faixa 3 */
-    #a2ff70 100%
-  );
+      #a2ff70 80%,
+      /* faixa 3 */
+      #a2ff70 100%);
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  position: fixed;     /* <-- Fica grudado no topo */
-  top: 0;              /* <-- Gruda no topo */
+  position: fixed;
+  /* <-- Fica grudado no topo */
+  top: 0;
+  /* <-- Gruda no topo */
   left: 0;
   z-index: 2000;
 
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
+
 .top-header img {
   height: 85px;
   width: auto;
@@ -78,7 +84,8 @@ footer img {
 /* ====== HEADER ====== */
 .topo {
   width: 100%;
-  background: #0d8f20; /* verde claro principal */
+  background: #0d8f20;
+  /* verde claro principal */
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -87,7 +94,8 @@ footer img {
 
 /* Barra de cima mais escura */
 .menu-superior {
-  background: #0a6a18; /* verde escuro */
+  background: #0a6a18;
+  /* verde escuro */
   width: 100%;
   padding: 10px 0;
 }
@@ -189,3 +197,37 @@ footer img {
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* --- MAPA FIXO NO TOPO --- */
+#map {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 600px;
+  /* altura do mapa */
+  z-index: 30;
+}
+
+/* --- ÁREA DO CONTEÚDO QUE DESCE --- */
+.conteudo {
+  padding: 20px;
+}
+
+/* ====== ESTILO DO CONTAINER DO MAPA ====== */
+.mapa-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0px;
+  /* abaixo do cabeçalho */
+  margin-bottom: 180px;
+}
+
+.mapa-container {
+  width: 100%;
+  max-width: 900px;
+  background: #83f396;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px #00000030;
+}

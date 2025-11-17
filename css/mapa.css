@@ -11,55 +11,19 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   font-family: 'Poppins', sans-serif;
-  overflow: hidden;
-  padding-top: 140px;
-  /* mesmo tamanho do header */
 }
 
-/* Rodapé fixo */
-footer {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 8px 0;
-  background: rgba(255, 255, 255, 0.6);
-  border-top: 2px solid #4caf50;
-  font-size: 0.9rem;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  color: #2e7d32;
-}
-
-footer img {
-  height: 36px;
-  width: auto;
-}
-
-
-/* ===== CABEÇALHO EM 3 FAIXAS FIXO ===== */
+/* ===== CABEÇALHO ===== */
 .top-header {
   width: 100%;
   height: 75px;
-  /* altura total */
   background: linear-gradient(to bottom,
       #2d8427 0%,
-      /* faixa 1 */
       #2d8427 50%,
-
       #2ecc38 50%,
-      /* faixa 2 */
       #2ecc38 80%,
-
       #a2ff70 80%,
-      /* faixa 3 */
       #a2ff70 100%);
 
   display: flex;
@@ -67,9 +31,7 @@ footer img {
   align-items: center;
 
   position: fixed;
-  /* <-- Fica grudado no topo */
   top: 0;
-  /* <-- Gruda no topo */
   left: 0;
   z-index: 2000;
 
@@ -81,69 +43,6 @@ footer img {
   width: auto;
 }
 
-/* ====== HEADER ====== */
-.topo {
-  width: 100%;
-  background: #0d8f20;
-  /* verde claro principal */
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Barra de cima mais escura */
-.menu-superior {
-  background: #0a6a18;
-  /* verde escuro */
-  width: 100%;
-  padding: 10px 0;
-}
-
-/* Menu horizontal */
-.menu {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  max-width: 1000px;
-  width: 100%;
-  margin: auto;
-}
-
-/* Links do menu */
-.menu a {
-  color: white;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  text-decoration: none;
-  padding: 10px 15px;
-  font-size: 16px;
-  text-shadow: 1px 1px 3px #000;
-}
-
-/* Efeito hover */
-.menu a:hover {
-  transform: scale(1.05);
-  transition: 0.2s;
-}
-
-/* Logo central */
-.logo-central {
-  height: 55px;
-  margin: 0 20px;
-}
-
-/* Slogan abaixo */
-.slogan {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  color: white;
-  padding: 8px 0;
-  letter-spacing: 5px;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px #000;
-}
-
 /* Botão hambúrguer */
 .menu-btn {
   position: absolute;
@@ -152,34 +51,30 @@ footer img {
   font-size: 32px;
   cursor: pointer;
   color: white;
-  z-index: 1000;
+  z-index: 3000;
 }
 
 /* Menu suspenso */
 #menu {
   position: absolute;
   right: 20px;
-  top: 70px;
-  background: rgba(19, 102, 16, 0.85);
+  top: 75px;
+  background: rgba(19, 102, 16, 0.90);
   width: 180px;
   border-radius: 10px;
   padding: 10px 0;
-  z-index: 999;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1500;
+  transition: 0.3s ease;
 }
 
-/* Oculto */
 .menu-hidden {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
 }
 
-/* Links do menu */
 #menu ul {
   list-style: none;
-  padding: 0;
-  margin: 0;
 }
 
 #menu ul li {
@@ -188,44 +83,32 @@ footer img {
 
 #menu ul li a {
   color: white;
-  text-decoration: none;
   font-size: 16px;
-  display: block;
+  text-decoration: none;
 }
 
-#menu ul li:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* --- MAPA FIXO NO TOPO --- */
+/* MAPA EM TELA CHEIA */
 #map {
   width: 100%;
-  height: calc(100vh - 75px); /* tela inteira - cabeçalho */
-  margin-top: 75px;           /* empurra para ficar abaixo do header */
+  height: calc(100vh - 75px - 50px); /* topo + rodapé */
+  margin-top: 75px;
 }
 
-
-
-/* --- ÁREA DO CONTEÚDO QUE DESCE --- */
-.conteudo {
-  padding: 20px;
-}
-
-/* ====== ESTILO DO CONTAINER DO MAPA ====== */
-.mapa-wrapper {
+/* Rodapé */
+footer {
   width: 100%;
+  height: 50px;
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-top: 0;
-  /* abaixo do cabeçalho */
-  margin-bottom: 180px;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  border-top: 2px solid #4caf50;
 }
 
-.mapa-container {
-  width: 100%;
-  max-width: 900px;
-  background: #83f396;
-  padding: 15px;
-  border-radius: 15px;
-  box-shadow: 0 4px 12px #00000030;
+footer img {
+  height: 32px;
 }

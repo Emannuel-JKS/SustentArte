@@ -47,7 +47,7 @@ function localizarUsuario() {
 
 // === CARREGAR PONTOS DE RECICLAGEM DO JSON ===
 function carregarPontos() {
-  fetch("../assets/data/pontos-reciclagem.json")
+  fetch("../assets/pontos-reciclagem.json")
     .then(response => response.json())
     .then(pontos => {
       pontos.forEach(ponto => {

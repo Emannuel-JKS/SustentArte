@@ -87,11 +87,38 @@ body {
   text-decoration: none;
 }
 
-/* MAPA EM TELA CHEIA */
+/* --- MAPA FIXO NO TOPO --- */
 #map {
   width: 100%;
-  height: calc(100vh - 75px - 50px); /* topo + rodapé */
-  margin-top: 75px;
+  height: 500px;
+  margin-top: 75px; /* Altura do cabeçalho */
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+
+/* --- ÁREA DO CONTEÚDO QUE DESCE --- */
+.conteudo {
+  padding: 20px;
+}
+
+/* ====== ESTILO DO CONTAINER DO MAPA ====== */
+.mapa-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  /* abaixo do cabeçalho */
+  margin-bottom: 180px;
+}
+
+.mapa-container {
+  width: 100%;
+  max-width: 900px;
+  background: #83f396;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px #00000030;
 }
 
 /* Rodapé */

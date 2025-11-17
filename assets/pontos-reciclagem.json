@@ -1,0 +1,87 @@
+[
+  {
+    "nome": "Ecoponto Renascença",
+    "endereco": "Av. Colares Moreira, Renascença II, São Luís - MA",
+    "lat": -2.504428,
+    "lng": -44.288612,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Eletrônicos"]
+  },
+  {
+    "nome": "Ecoponto Alemanha",
+    "endereco": "Av. dos Franceses, Alemanha, São Luís - MA",
+    "lat": -2.531021,
+    "lng": -44.286749,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Entulho"]
+  },
+  {
+    "nome": "Ecoponto Anil",
+    "endereco": "Rua São Sebastião, Anil, São Luís - MA",
+    "lat": -2.524144,
+    "lng": -44.271477,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Orgânico"]
+  },
+  {
+    "nome": "Ecoponto Bequimão",
+    "endereco": "Rua 04, Bequimão, São Luís - MA",
+    "lat": -2.53973,
+    "lng": -44.2661,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Entulho"]
+  },
+  {
+    "nome": "Ecoponto Cidade Operária",
+    "endereco": "Avenida Este 203, Cidade Operária, São Luís - MA",
+    "lat": -2.563338,
+    "lng": -44.233449,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Orgânico"]
+  },
+  {
+    "nome": "Ecoponto Parque Timbiras",
+    "endereco": "Rua 02, Parque Timbiras, São Luís - MA",
+    "lat": -2.51562,
+    "lng": -44.24698,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal"]
+  },
+  {
+    "nome": "Ecoponto Turu",
+    "endereco": "Av. São Luís Rei de França, Turu, São Luís - MA",
+    "lat": -2.49749,
+    "lng": -44.25033,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Óleo"]
+  },
+  {
+    "nome": "Ecoponto Vinhais",
+    "endereco": "Av. Jerônimo de Albuquerque, Vinhais, São Luís - MA",
+    "lat": -2.518722,
+    "lng": -44.265842,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal"]
+  },
+  {
+    "nome": "Shopping da Ilha – Ponto de Reciclagem",
+    "endereco": "Av. Daniel de La Touche, Maranhão Novo, São Luís - MA",
+    "lat": -2.504624,
+    "lng": -44.296990,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Eletrônicos", "Roupas", "Óleo"]
+  },
+  {
+    "nome": "Rio Anil Shopping – Ponto de Reciclagem",
+    "endereco": "Av. São Luís Rei de França, 8, Turu, São Luís - MA",
+    "lat": -2.515378,
+    "lng": -44.273561,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal", "Roupas"]
+  },
+  {
+    "nome": "Mateus Supermercados – Retorno Sustentável (Calhau)",
+    "endereco": "Av. dos Holandeses, Calhau, São Luís - MA",
+    "lat": -2.489011,
+    "lng": -44.276544,
+    "materiais": ["Plástico", "Eletrônicos", "Óleo"]
+  },
+  {
+    "nome": "Havan – Ponto de Reciclagem",
+    "endereco": "Av. Daniel de La Touche, Cohama, São Luís - MA",
+    "lat": -2.515829,
+    "lng": -44.275961,
+    "materiais": ["Papel", "Plástico", "Vidro", "Metal"]
+  }
+]
+

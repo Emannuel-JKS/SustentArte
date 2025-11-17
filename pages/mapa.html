@@ -53,51 +53,50 @@
 
   <script>
   function initMap() {
-  const map = new google.maps.Map(document.getElementById("map"), {
-    center: { lat: -2.5299, lng: -44.3028 },
-    zoom: 16,
-    mapId: "mapa_sustentavel_verde"
+  const mapa = new google.maps.Map(document.getElementById("map"), {
+    zoom: 15,
+    center: { lat: -2.53, lng: -44.30 },
   });
 
-  const userIcon = "../assets/icon/usuario-icon-loc.png";
-  let userMarker = null;
-
-  // --- LOCALIZAÇÃO EM TEMPO REAL + FOLLOW MODE ---
-  if (navigator.geolocation) {
-    navigator.geolocation.watchPosition(
-      (pos) => {
-        const userLocation = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        };
-
-        // Se ainda não existe um marcador do usuário, cria
-        if (!userMarker) {
-          userMarker = new google.maps.Marker({
-            position: userLocation,
-            map: map,
-            icon: userIcon,
-            title: "Você está aqui!"
-          });
-        } else {
-          // Atualiza a posição do marcador existente
-          userMarker.setPosition(userLocation);
-        }
-
-        // --- FOLLOW MODE (MAPA SEGUE O USUÁRIO) ---
-        map.panTo(userLocation);
-      },
-      (err) => {
-        console.log("Erro ao obter localização:", err);
-      },
-      {
-        enableHighAccuracy: true,  
-        maximumAge: 0,
-        timeout: 5000
-      }
-    );
+  if (!navigator.geolocation) {
+    alert("Seu navegador não suporta geolocalização.");
+    return;
   }
+
+  navigator.geolocation.getCurrentPosition(
+    (pos) => {
+      const userLocation = {
+        lat: pos.coords.latitude,
+        lng: pos.coords.longitude,
+      };
+
+      mapa.setCenter(userLocation);
+
+      new google.maps.Marker({
+        position: userLocation,
+        map: mapa,
+        title: "Você está aqui!"
+      });
+    },
+
+    (erro) => {
+      console.error("Erro geolocalização:", erro);
+
+      if (erro.code === 1) alert("⚠ Permissão negada. Vá nas configurações e permita a localização.");
+      if (erro.code === 2) alert("❌ Localização indisponível.");
+      if (erro.code === 3) alert("⏳ Tempo de busca excedido.");
+
+      alert("Erro ao tentar obter localização: " + erro.message);
+    },
+
+    {
+      enableHighAccuracy: true,
+      timeout: 8000,
+      maximumAge: 0
+    }
+  );
 }
+
 
 
 </script>

@@ -55,14 +55,14 @@
   function initMap() {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: -2.5299, lng: -44.3028 },
-    zoom: 11,
+    zoom: 16,
     mapId: "mapa_sustentavel_verde"
   });
 
   const userIcon = "../assets/icon/usuario-icon-loc.png";
   let userMarker = null;
 
-  // --- LOCALIZAÇÃO EM TEMPO REAL ---
+  // --- LOCALIZAÇÃO EM TEMPO REAL + FOLLOW MODE ---
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(
       (pos) => {
@@ -79,19 +79,19 @@
             icon: userIcon,
             title: "Você está aqui!"
           });
-
-          // Centraliza no início
-          map.setCenter(userLocation);
         } else {
-          // Atualiza a posição do marcador
+          // Atualiza a posição do marcador existente
           userMarker.setPosition(userLocation);
         }
+
+        // --- FOLLOW MODE (MAPA SEGUE O USUÁRIO) ---
+        map.panTo(userLocation);
       },
       (err) => {
         console.log("Erro ao obter localização:", err);
       },
       {
-        enableHighAccuracy: true,  // usa GPS se disponível
+        enableHighAccuracy: true,  
         maximumAge: 0,
         timeout: 5000
       }

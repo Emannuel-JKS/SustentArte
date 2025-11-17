@@ -90,7 +90,7 @@ body {
 /* --- MAPA FIXO NO TOPO --- */
 #map {
   width: 100%;
-  height: 500px;
+  height: 800px;
   margin-top: 75px; /* Altura do cabeçalho */
   border-radius: 15px;
   overflow: hidden;

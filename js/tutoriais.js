@@ -2,7 +2,7 @@
 // 🔰 INICIALIZAÇÃO DO SUPABASE
 // ======================================================
 const supabaseUrl = "https://afobiejrsjolurxeqnuz.supabase.co";
-const supabaseKey = "SEU_ANON_KEY_AQUI"; // coloque sua anon key aqui
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw"; // coloque sua anon key aqui
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // ======================================================

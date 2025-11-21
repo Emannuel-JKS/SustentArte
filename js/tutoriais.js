@@ -1,504 +1,178 @@
 // ======================================================
-
 // 🔰 INICIALIZAÇÃO DO SUPABASE
+// ======================================================
+const supabaseUrl = "https://afobiejrsjolurxeqnuz.supabase.co";
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
+
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // ======================================================
-
-const
- supabaseUrl = 
-"https://afobiejrsjolurxeqnuz.supabase.co"
-;
-const
- supabaseKey = 
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw"
-;
-const
- supabase = supabase.createClient(supabaseUrl, supabaseKey);
-// ======================================================
-
 // ❤️ LIKE LOCAL (futuramente vamos salvar no banco)
-
 // ======================================================
+function toggleLike(btn) {
+  btn.classList.toggle("liked");
 
-function
- 
-toggleLike
-(
-btn
-) 
-{
-  btn.classList.toggle(
-"liked"
-);
-  
-const
- heart = btn.querySelector(
-".heart"
-);
-  heart.innerHTML = btn.classList.contains(
-"liked"
-)
-    ? 
-"&#10084;"
- 
-// cheio
-
-    : 
-"&#9825;"
-; 
-// vazio
-
+  const heart = btn.querySelector(".heart");
+  heart.innerHTML = btn.classList.contains("liked")
+    ? "&#10084;" // cheio
+    : "&#9825;"; // vazio
 }
-// ======================================================
 
+// ======================================================
 // 💬 ABRIR/FECHAR ÁREA DE COMENTÁRIOS
-
 // ======================================================
-
-function
- 
-toggleCommentBox
-(
-btn
-) 
-{
-  
-const
- box = btn.parentElement.nextElementSibling;
-  box.classList.toggle(
-"hidden"
-);
+function toggleCommentBox(btn) {
+  const box = btn.parentElement.nextElementSibling;
+  box.classList.toggle("hidden");
 }
-// ======================================================
-
-// 👑 VERIFICAR SE O USUÁRIO É ADMIN
 
 // ======================================================
+// 👑 VERIFICAR SE O USUÁRIO É ADMIN (VERSÃO CORRETA)
+// ======================================================
+async function checkAdmin() {
+  const { data: userData, error: userErr } = await supabase.auth.getUser();
 
-async
- 
-function
- 
-checkAdmin
-(
-) 
-{
-  
-try
- {
-    
-const
- { 
-data
-: userData, 
-error
-: userErr } = 
-await
- supabase.auth.getUser();
-    
-if
- (userErr || !userData || !userData.user) {
-      
-console
-.warn(
-"Usuário não logado."
-);
-      
-document
-.getElementById(
-"btn-add-video"
-).style.display = 
-"none"
-;
-      
-return
-;
-    }
-    
-const
- userId = userData.user.id;
-    
-// Lê direto da tabela auth.users o campo is_super_admin
+  if (userErr || !userData.user) {
+    console.warn("Usuário não logado.");
+    return;
+  }
 
-    
-const
- { data, error } = 
-await
- supabase
-      .from(
-"auth.users"
-)
-      .select(
-"is_super_admin"
-)
-      .eq(
-"id"
-, userId)
-      .single();
-    
-if
- (error) {
-      
-// Se RLS bloquear, veremos um erro aqui — trataremos silenciosamente
+  const userId = userData.user.id;
 
-      
-console
-.error(
-"Erro ao verificar is_super_admin:"
-, error);
-      
-document
-.getElementById(
-"btn-add-video"
-).style.display = 
-"none"
-;
-      
-return
-;
-    }
-    
-if
- (data && data.is_super_admin === 
-true
-) {
-      
-document
-.getElementById(
-"btn-add-video"
-).style.display = 
-"flex"
-;
-    } 
-else
- {
-      
-document
-.getElementById(
-"btn-add-video"
-).style.display = 
-"none"
-;
-    }
-  } 
-catch
- (err) {
-    
-console
-.error(
-"checkAdmin falhou:"
-, err);
-    
-document
-.getElementById(
-"btn-add-video"
-).style.display = 
-"none"
-;
+  // Consulta direta na tabela interna auth.users
+  const { data, error } = await supabase
+    .from("auth.users")
+    .select("is_super_admin")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Erro ao verificar admin:", error);
+    return;
+  }
+
+  if (data && data.is_super_admin === true) {
+    document.getElementById("btn-add-video").style.display = "flex";
   }
 }
-// Reexecuta a verificação no carregamento
 
 checkAdmin();
-// Reexecuta quando a sessão muda (login/logout)
 
-supabase.auth.onAuthStateChange(
-(
-event, session
-) =>
- {
-  
-// small debounce: dá tempo do cliente restaurar sessão
-
-  
-setTimeout
-(
-() =>
- {
-    checkAdmin();
-  }, 
-100
-);
-});
 // ======================================================
-
 // ▶️ CARREGAR VÍDEOS DO SUPABASE
-
 // ======================================================
+async function loadVideos() {
+  const container = document.querySelector(".tutorials-container");
+  container.innerHTML = "<p>Carregando vídeos...</p>";
 
-async
- 
-function
- 
-loadVideos
-(
-) 
-{
-  
-const
- container = 
-document
-.querySelector(
-".tutorials-container"
-);
-  container.innerHTML = 
-"<p>Carregando vídeos...</p>"
-;
-  
-const
- { data, error } = 
-await
- supabase
-    .from(
-"videos"
-)
-    .select(
-"*"
-)
-    .order(
-"created_at"
-, { 
-ascending
-: 
-false
- });
-  
-if
- (error) {
-    
-console
-.error(error);
-    container.innerHTML = 
-"<p>Erro ao carregar vídeos.</p>"
-;
-    
-return
-;
-  }
-  
-if
- (!data || data.length === 
-0
-) {
-    container.innerHTML = 
-"<p>Nenhum vídeo cadastrado ainda.</p>"
-;
-    
-return
-;
-  }
-  
-// Limpa
+  const { data, error } = await supabase
+    .from("videos")
+    .select("*")
+    .order("created_at", { ascending: false });
 
-  container.innerHTML = 
-""
-;
-  data.forEach(
-(
-video
-) =>
- {
-    
-const
- card = 
-document
-.createElement(
-"div"
-);
-    card.classList.add(
-"tutorial-card"
-);
-    card.innerHTML = 
-`
+  if (error) {
+    console.error(error);
+    container.innerHTML = "<p>Erro ao carregar vídeos.</p>";
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    container.innerHTML = "<p>Nenhum vídeo cadastrado ainda.</p>";
+    return;
+  }
+
+  container.innerHTML = "";
+
+  data.forEach(video => {
+    const card = document.createElement("div");
+    card.classList.add("tutorial-card");
+
+    card.innerHTML = `
       <div class="video-wrapper">
-        <iframe src="https://www.youtube.com/embed/
-${video.youtube_id}
-" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/${video.youtube_id}" allowfullscreen></iframe>
       </div>
-      <h3 class="tutorial-title">
-${video.title}
-</h3>
+
+      <h3 class="tutorial-title">${video.title}</h3>
+
       <div class="tutorial-actions">
         <button class="like-btn" onclick="toggleLike(this)">
           <span class="heart">&#9825;</span>
         </button>
+
         <button class="comment-btn" onclick="toggleCommentBox(this)">
           💬 Comentários
         </button>
       </div>
+
       <div class="comment-box hidden">
         <textarea placeholder="Escreva um comentário..."></textarea>
         <button class="send-comment">Enviar</button>
       </div>
-    `
-;
+    `;
+
     container.appendChild(card);
   });
 }
+
 loadVideos();
-// ======================================================
 
+// ======================================================
 // ➕ MODAL: ABRIR / FECHAR
+// ======================================================
+document.getElementById("btn-add-video").addEventListener("click", () => {
+  document.getElementById("modal-add-video").style.display = "flex";
+});
+
+document.getElementById("close-modal").addEventListener("click", () => {
+  document.getElementById("modal-add-video").style.display = "none";
+});
 
 // ======================================================
-
-document
-.getElementById(
-"btn-add-video"
-).addEventListener(
-"click"
-, 
-() =>
- {
-  
-document
-.getElementById(
-"modal-add-video"
-).style.display = 
-"flex"
-;
-});
-document
-.getElementById(
-"close-modal"
-).addEventListener(
-"click"
-, 
-() =>
- {
-  
-document
-.getElementById(
-"modal-add-video"
-).style.display = 
-"none"
-;
-});
-// ======================================================
-
 // ▶️ EXTRATOR DE ID DO YOUTUBE
-
 // ======================================================
-
-function
- 
-extractYoutubeId
-(
-url
-) 
-{
-  
-const
- regExp =
-    
-/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/
-;
-  
-const
- match = url.match(regExp);
-  
-return
- match && match[
-2
-].length === 
-11
- ? match[
-2
-] : 
-null
-;
+function extractYoutubeId(url) {
+  const regExp =
+    /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : null;
 }
-// ======================================================
 
+// ======================================================
 // 📌 SALVAR NOVO VÍDEO
-
 // ======================================================
+document
+  .getElementById("confirm-add-video")
+  .addEventListener("click", async () => {
+    const youtubeUrl = document.getElementById("youtube-input").value.trim();
+    const title = document.getElementById("title-input").value.trim();
+    const youtubeId = extractYoutubeId(youtubeUrl);
 
-document
-.getElementById(
-"confirm-add-video"
-).addEventListener(
-"click"
-, 
-async
- () => {
-  
-const
- youtubeUrl = 
-document
-.getElementById(
-"youtube-input"
-).value.trim();
-  
-const
- title = 
-document
-.getElementById(
-"title-input"
-).value.trim();
-  
-const
- youtubeId = extractYoutubeId(youtubeUrl);
-  
-if
- (!youtubeId) {
-    alert(
-"Link inválido do YouTube."
-);
-    
-return
-;
-  }
-  
-const
- { 
-data
-: userData } = 
-await
- supabase.auth.getUser();
-  
-if
- (!userData || !userData.user) {
-    alert(
-"Você precisa estar logado."
-);
-    
-return
-;
-  }
-  
-const
- { error } = 
-await
- supabase.from(
-"videos"
-).insert({
-    
-youtube_url
-: youtubeUrl,
-    
-youtube_id
-: youtubeId,
-    title,
-    
-created_by
-: userData.user.id,
+    if (!youtubeId) {
+      alert("Link inválido do YouTube.");
+      return;
+    }
+
+    const { data: userData } = await supabase.auth.getUser();
+
+    if (!userData.user) {
+      alert("Você precisa estar logado.");
+      return;
+    }
+
+    const { error } = await supabase.from("videos").insert({
+      youtube_url: youtubeUrl,
+      youtube_id: youtubeId,
+      title,
+      created_by: userData.user.id
+    });
+
+    if (error) {
+      console.error(error);
+      alert("Erro ao adicionar vídeo.");
+      return;
+    }
+
+    alert("Vídeo adicionado com sucesso!");
+    location.reload();
   });
-  
-if
- (error) {
-    
-console
-.error(error);
-    alert(
-"Erro ao adicionar vídeo."
-);
-    
-return
-;
-  }
-  alert(
-"Vídeo adicionado com sucesso!"
-);
-  location.reload();
-});

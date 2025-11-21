@@ -7,7 +7,7 @@
     <title>Tutoriais - SustentArte</title>
     <link rel="stylesheet" href="../css/tutoriais.css" />
 
-    <!-- 🔥 SUPABASE SDK -->
+    <!-- 🔥 SUPABASE SDK (CARREGAR SOMENTE UMA VEZ!!) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- 🔥 INICIALIZAÇÃO DO SUPABASE -->
@@ -15,7 +15,7 @@
         const SUPABASE_URL = "https://afobiejrsjolurxeqnuz.supabase.co";
         const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
 
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        window.supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     </script>
 </head>
 
@@ -39,16 +39,17 @@
         </nav>
     </header>
 
-    <!-- BOTÃO DO ADMIN -->
+    <!-- BOTÃO DO ADMIN (APENAS SUPADMIN VERÁ) -->
     <button id="btn-add-video" style="display: none;" class="add-video-btn">
         ➕ Adicionar Vídeo
     </button>
 
     <div class="home-container"></div>
 
+    <!-- CONTAINER DOS TUTORIAIS -->
     <section class="tutorials-container">
 
-        <!-- Seus vídeos fixos (serão removidos depois quando puxar do banco) -->
+        <!-- EXEMPLOS FIXOS (VÃO SAIR QUANDO VÍDEOS VIEREM DO BANCO) -->
         <div class="tutorial-card">
             <div class="video-wrapper">
                 <iframe src="https://www.youtube.com/embed/0bjpFeRew8s" allowfullscreen></iframe>
@@ -90,6 +91,7 @@
                 <button class="send-comment">Enviar</button>
             </div>
         </div>
+
     </section>
 
     <!-- Rodapé -->
@@ -98,7 +100,7 @@
         <p>© 2025 SustentArte — desenvolvido por <strong>Emannuel Alves</strong></p>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Funções básicas -->
     <script>
         function toggleMenu() {
             document.getElementById("menu").classList.toggle("menu-hidden");
@@ -107,22 +109,12 @@
         function toggleCommentBox(btn) {
             btn.parentElement.nextElementSibling.classList.toggle("hidden");
         }
-    </script
+    </script>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-  // INICIALIZAÇÃO DO SUPABASE — SUBSTITUA PELA SUA
-  const supabaseUrl = "https://afobiejrsjolurxeqnuz.supabase.co";
-  const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
-  window.supabase = supabase.createClient(supabaseUrl, supabaseKey);
-</script>
-
-
-    <!-- 🔥 AGORA O JS CONSEGUE USAR O SUPABASE CORRETAMENTE -->
+    <!-- Seu JS principal -->
     <script defer src="../js/tutoriais.js"></script>
 
-    <!-- MODAL PARA ADICIONAR VÍDEO -->
+    <!-- MODAL PARA ADICIONAR VIDEO -->
     <div id="modal-add-video" class="modal" style="display: none;">
         <div class="modal-content">
             <h3>Adicionar Vídeo do YouTube</h3>

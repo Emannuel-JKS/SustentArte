@@ -2,7 +2,9 @@
 // 🔰 INICIALIZAÇÃO DO SUPABASE
 // ======================================================
 const supabaseUrl = "https://afobiejrsjolurxeqnuz.supabase.co";
-const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw"; // coloque sua anon key aqui
+const supabaseKey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
+
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // ======================================================
@@ -26,20 +28,31 @@ function toggleCommentBox(btn) {
 }
 
 // ======================================================
-// 👑 VERIFICAR SE O USUÁRIO É ADMIN
+// 👑 VERIFICAR SE O USUÁRIO É ADMIN (VERSÃO CORRETA)
 // ======================================================
 async function checkAdmin() {
-  const { data, error } = await supabase.auth.getUser();
+  const { data: userData, error: userErr } = await supabase.auth.getUser();
 
-  if (error || !data.user) {
+  if (userErr || !userData.user) {
     console.warn("Usuário não logado.");
     return;
   }
 
-  const user = data.user;
+  const userId = userData.user.id;
 
-  // Você habilitou o admin pelo campo "is_super_admin"
-  if (user.is_super_admin === true) {
+  // Consulta direta na tabela interna auth.users
+  const { data, error } = await supabase
+    .from("auth.users")
+    .select("is_super_admin")
+    .eq("id", userId)
+    .single();
+
+  if (error) {
+    console.error("Erro ao verificar admin:", error);
+    return;
+  }
+
+  if (data && data.is_super_admin === true) {
     document.getElementById("btn-add-video").style.display = "flex";
   }
 }
@@ -69,7 +82,6 @@ async function loadVideos() {
     return;
   }
 
-  // Limpa
   container.innerHTML = "";
 
   data.forEach(video => {
@@ -129,36 +141,38 @@ function extractYoutubeId(url) {
 // ======================================================
 // 📌 SALVAR NOVO VÍDEO
 // ======================================================
-document.getElementById("confirm-add-video").addEventListener("click", async () => {
-  const youtubeUrl = document.getElementById("youtube-input").value.trim();
-  const title = document.getElementById("title-input").value.trim();
-  const youtubeId = extractYoutubeId(youtubeUrl);
+document
+  .getElementById("confirm-add-video")
+  .addEventListener("click", async () => {
+    const youtubeUrl = document.getElementById("youtube-input").value.trim();
+    const title = document.getElementById("title-input").value.trim();
+    const youtubeId = extractYoutubeId(youtubeUrl);
 
-  if (!youtubeId) {
-    alert("Link inválido do YouTube.");
-    return;
-  }
+    if (!youtubeId) {
+      alert("Link inválido do YouTube.");
+      return;
+    }
 
-  const { data: userData } = await supabase.auth.getUser();
+    const { data: userData } = await supabase.auth.getUser();
 
-  if (!userData.user) {
-    alert("Você precisa estar logado.");
-    return;
-  }
+    if (!userData.user) {
+      alert("Você precisa estar logado.");
+      return;
+    }
 
-  const { error } = await supabase.from("videos").insert({
-    youtube_url: youtubeUrl,
-    youtube_id: youtubeId,
-    title,
-    created_by: userData.user.id
+    const { error } = await supabase.from("videos").insert({
+      youtube_url: youtubeUrl,
+      youtube_id: youtubeId,
+      title,
+      created_by: userData.user.id
+    });
+
+    if (error) {
+      console.error(error);
+      alert("Erro ao adicionar vídeo.");
+      return;
+    }
+
+    alert("Vídeo adicionado com sucesso!");
+    location.reload();
   });
-
-  if (error) {
-    console.error(error);
-    alert("Erro ao adicionar vídeo.");
-    return;
-  }
-
-  alert("Vídeo adicionado com sucesso!");
-  location.reload();
-});

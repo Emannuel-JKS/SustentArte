@@ -6,6 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tutoriais - SustentArte</title>
     <link rel="stylesheet" href="../css/tutoriais.css" />
+
+    <!-- 🔥 SUPABASE SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- 🔥 INICIALIZAÇÃO DO SUPABASE -->
+    <script>
+        const SUPABASE_URL = "https://afobiejrsjolurxeqnuz.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmb2JpZWpyc2pvbHVyeGVxbnV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI1NTkxMDAsImV4cCI6MjA3ODEzNTEwMH0.dhHgjXnOzZE5f3HDBzgBjuZss33LrGPuM1ckKeG6-bw";
+
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    </script>
 </head>
 
 <body>
@@ -18,7 +29,6 @@
             ☰
         </div>
 
-        <!-- Menu Suspenso -->
         <nav id="menu" class="menu-hidden">
             <ul>
                 <li><a href="mapa.html">Mapa de Reciclagem</a></li>
@@ -29,34 +39,26 @@
         </nav>
     </header>
 
+    <!-- BOTÃO DO ADMIN -->
     <button id="btn-add-video" style="display: none;" class="add-video-btn">
-  ➕ Adicionar Vídeo
-</button>
+        ➕ Adicionar Vídeo
+    </button>
 
-
-    <!-- ===== BARRA SUPERIOR ===== -->
     <div class="home-container"></div>
 
-
-    <!-- ===================================== -->
-    <!-- 🟩 ÁREA CENTRAL DE TUTORIAIS (NOVO)   -->
-    <!-- ===================================== -->
     <section class="tutorials-container">
 
-        <!-- === VIDEO 1 === -->
+        <!-- Seus vídeos fixos (serão removidos depois quando puxar do banco) -->
         <div class="tutorial-card">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/0bjpFeRew8s" allowfullscreen title="Vídeo Tutorial 1">
-                </iframe>
+                <iframe src="https://www.youtube.com/embed/0bjpFeRew8s" allowfullscreen></iframe>
             </div>
-
             <h3 class="tutorial-title">Como Reciclar Corretamente</h3>
 
             <div class="tutorial-actions">
                 <button class="like-btn" onclick="toggleLike(this)">
-                    <span class="heart">&#9825;</span> <!-- coração vazio -->
+                    <span class="heart">&#9825;</span>
                 </button>
-
                 <button class="comment-btn" onclick="toggleCommentBox(this)">
                     💬 Comentários
                 </button>
@@ -66,23 +68,18 @@
                 <textarea placeholder="Escreva um comentário..."></textarea>
                 <button class="send-comment">Enviar</button>
             </div>
-
         </div>
 
-                <!-- === VIDEO 2 === -->
         <div class="tutorial-card">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/LV2u4or_eeY" allowfullscreen title="Vídeo Tutorial 1">
-                </iframe>
+                <iframe src="https://www.youtube.com/embed/LV2u4or_eeY" allowfullscreen></iframe>
             </div>
-
             <h3 class="tutorial-title">Como Reciclar Corretamente 2</h3>
 
             <div class="tutorial-actions">
                 <button class="like-btn" onclick="toggleLike(this)">
-                    <span class="heart">&#9825;</span> <!-- coração vazio -->
+                    <span class="heart">&#9825;</span>
                 </button>
-
                 <button class="comment-btn" onclick="toggleCommentBox(this)">
                     💬 Comentários
                 </button>
@@ -92,11 +89,8 @@
                 <textarea placeholder="Escreva um comentário..."></textarea>
                 <button class="send-comment">Enviar</button>
             </div>
-
         </div>
     </section>
-
-
 
     <!-- Rodapé -->
     <footer>
@@ -107,26 +101,27 @@
     <!-- Scripts -->
     <script>
         function toggleMenu() {
-            const menu = document.getElementById("menu");
-            menu.classList.toggle("menu-hidden");
+            document.getElementById("menu").classList.toggle("menu-hidden");
         }
 
         function toggleCommentBox(btn) {
-            const box = btn.parentElement.nextElementSibling;
-            box.classList.toggle("hidden");
+            btn.parentElement.nextElementSibling.classList.toggle("hidden");
         }
     </script>
+
+    <!-- 🔥 AGORA O JS CONSEGUE USAR O SUPABASE CORRETAMENTE -->
     <script defer src="../js/tutoriais.js"></script>
 
+    <!-- MODAL PARA ADICIONAR VÍDEO -->
     <div id="modal-add-video" class="modal" style="display: none;">
-  <div class="modal-content">
-    <h3>Adicionar Vídeo do YouTube</h3>
-    <input type="text" id="youtube-input" placeholder="Cole o link do YouTube">
-    <input type="text" id="title-input" placeholder="Título do vídeo">
-    <button id="confirm-add-video">Salvar</button>
-    <button id="close-modal">Cancelar</button>
-  </div>
-</div>
+        <div class="modal-content">
+            <h3>Adicionar Vídeo do YouTube</h3>
+            <input type="text" id="youtube-input" placeholder="Cole o link do YouTube">
+            <input type="text" id="title-input" placeholder="Título do vídeo">
+            <button id="confirm-add-video">Salvar</button>
+            <button id="close-modal">Cancelar</button>
+        </div>
+    </div>
 
 </body>
 

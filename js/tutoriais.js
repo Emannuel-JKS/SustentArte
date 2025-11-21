@@ -14,3 +14,17 @@ function toggleCommentBox(btn) {
 
   box.classList.toggle("hidden");
 }
+
+async function checkAdmin() {
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) return;
+
+  // verifica se existe a chave role = admin no metadata
+  const role = user.user_metadata?.role;
+
+  if (role === "admin") {
+    document.getElementById("btn-add-video").style.display = "flex";
+  }
+}
+checkAdmin();

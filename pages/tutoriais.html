@@ -29,6 +29,11 @@
         </nav>
     </header>
 
+    <button id="btn-add-video" style="display: none;" class="add-video-btn">
+  ➕ Adicionar Vídeo
+</button>
+
+
     <!-- ===== BARRA SUPERIOR ===== -->
     <div class="home-container"></div>
 
@@ -112,6 +117,17 @@
         }
     </script>
     <script defer src="../js/tutoriais.js"></script>
+
+    <div id="modal-add-video" class="modal" style="display: none;">
+  <div class="modal-content">
+    <h3>Adicionar Vídeo do YouTube</h3>
+    <input type="text" id="youtube-input" placeholder="Cole o link do YouTube">
+    <input type="text" id="title-input" placeholder="Título do vídeo">
+    <button id="confirm-add-video">Salvar</button>
+    <button id="close-modal">Cancelar</button>
+  </div>
+</div>
+
 </body>
 
 </html>

@@ -43,6 +43,16 @@
     }
   </script>
 
+      <!-- proteger pagina acessando apenas com o login -->
+    <script>
+supabase.auth.getSession().then(({ data }) => {
+  if (!data.session) {
+    window.location.href = "../index.html";
+  }
+});
+</script>
+
+
   <!-- JS PRINCIPAL DO MAPA -->
   <script src="../js/mapa.js"></script>
 

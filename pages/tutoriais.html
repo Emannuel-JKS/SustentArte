@@ -111,6 +111,16 @@
         }
     </script>
 
+    <!-- proteger pagina acessando apenas com o login -->
+    <script>
+supabase.auth.getSession().then(({ data }) => {
+  if (!data.session) {
+    window.location.href = "../index.html";
+  }
+});
+</script>
+
+
     <!-- Seu JS principal -->
     <script defer src="../js/tutoriais.js"></script>
 

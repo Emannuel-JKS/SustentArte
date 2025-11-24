@@ -7,6 +7,8 @@ setTimeout(() => {
   window.location.href = "pages/login.html"; // caminho atualizado
 }, tempoAnimacao);
 
+
+// ======== Logout ========
 async function logout() {
   const { error } = await supabase.auth.signOut();
 

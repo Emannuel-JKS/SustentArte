@@ -6,3 +6,14 @@ const tempoAnimacao = 5000;
 setTimeout(() => {
   window.location.href = "pages/login.html"; // caminho atualizado
 }, tempoAnimacao);
+
+async function logout() {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) {
+    console.error("Erro ao sair:", error.message);
+    alert("Erro ao sair. Tente novamente.");
+  } else {
+    window.location.href = "../pages/login.html";
+  }
+}
